@@ -29,6 +29,7 @@ export default function Home() {
             />
           </a>
         </div>
+        <h2 className="text-3xl font-bold underline">Hello my code</h2>
       </div>
 
       <div className={styles.center}>
