@@ -2,9 +2,15 @@
 
 import styles from "./page.module.css";
 
-import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  MarkerF,
+  useLoadScript,
+  Marker,
+} from "@react-google-maps/api";
 import type { NextPage } from "next";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { JsxElement } from "typescript";
 
 export default function Home() {
   const libraries = useMemo(() => ["places"], []);
@@ -18,23 +24,56 @@ export default function Home() {
     return <p>Loading...</p>;
   }
 
-  return <Map />;
+  return (
+    <>
+      <Map />
+    </>
+  );
 }
+const animationConfig = {
+  duration: 1000,
+  // easing: function (x, t, b, c, d) {
+  //   // jquery animation: swing (easeOutQuad)
+  //   return -c * (t /= d) * (t - 2) + b;
+  // },
+};
 function Map() {
-  const [position, setPosition] = useState({ lat: 44, lng: -80 });
-  const markerRef = useRef(null);
-  function handleMapClick() {
-    setPosition({ lat: position.lat + 0.001, lng: -80.04 });
-  }
+  const [position, setPosition] = useState({ lat: 51.4992, lng: -0.1188 });
+  const droneMarkerRef = useRef<JsxElement>(null);
+  const [mapPosition, setMapPosition] = useState({
+    lat: 51.4992,
+    lng: -0.1188,
+  });
 
+  function createInterwalPositionChange() {
+    setPosition((prevState) => {
+      return {
+        lng: (prevState.lng = +0.001),
+        lat: (prevState.lat = +0.001),
+      };
+    });
+  }
+  const staticMapPosition = useMemo(() => mapPosition, [mapPosition]);
+  function handleMapClick() {
+    setPosition({ lat: position.lat + 0.1, lng: -80.04 });
+  }
+  console.log(position);
   return (
     <GoogleMap
-      zoom={10}
-      center={{ lat: 44, lng: -80 }}
+      zoom={14}
+      center={staticMapPosition}
       mapContainerClassName={`${styles.mapcontainer}`}
-      onClick={handleMapClick}
+      onClick={createInterwalPositionChange}
     >
-      <MarkerF position={position}></MarkerF>
+      <MarkerF
+        // ref={droneMarkerRef}
+        position={position}
+        icon={{
+          url: "/drone.svg",
+          fillColor: "#EB00FF",
+          scale: 2,
+        }}
+      ></MarkerF>
     </GoogleMap>
   );
 }
