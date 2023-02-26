@@ -22,15 +22,21 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Developments Epics
 
-- Create PWA App
-- Create Google Map Component 
- - Map
- - Marker
-- Move function for Marker movement 
-- Add FireStore
- - function "fake drone" sending it's location to store
- - create connection to firestore with and listen for store updates
-- Add authentication 
+<ul>
+  <li>Create PWA App/li>
+  <li>Create Google Map Component </li>
+    <ul>
+      <li>Map</li>
+      <li>Marker</li>
+    </ul>
+  <li>Move function for Marker movement</li>
+  <li>Add FireStore</li>
+    <ul>
+      <li>function "fake drone" sending it's location to store</li>
+      <li>create connection to firestore with and listen for store updates</li>
+    </ul>
+  <li>Add authentication</li>
+</ul>
 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Check out more [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
