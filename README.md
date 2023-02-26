@@ -24,7 +24,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Developments Epics
 
 <ul>
-  <li>Create PWA App/li>
+  <li>Create PWA App</li>
   <li>Create Google Map Component </li>
     <ul>
       <li>Map</li>
