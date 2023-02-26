@@ -1,4 +1,5 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Technical assigment turned into project :)
+App allows you to track drone movement on google maps
 
 ## Getting Started
 
