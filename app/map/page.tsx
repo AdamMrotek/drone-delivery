@@ -1,8 +1,15 @@
 "use client";
 
 import styles from "./page.module.css";
-import { collection, addDoc, getDocs } from "firebase/firestore";
-import { db } from "../../components/firebaseConig";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  setDoc,
+  doc,
+  onSnapshot,
+} from "firebase/firestore";
+import { db } from "../../components/firebaseConfig";
 
 import {
   GoogleMap,
@@ -66,15 +73,15 @@ function Map() {
     lng: thomasHospitalCoordinates.lng - guysHospitalCoordinates.lng,
   };
 
-  function dispachDrone() {
+  function flyDrone(position: { lat: number; lng: number }) {
     console.log(droneMarkerRef.current);
     if (!droneMarkerRef.current) return;
-    animateMarkerTo(droneMarkerRef.current, { lat: 51.51, lng: -0.121 });
+    animateMarkerTo(droneMarkerRef.current, position);
   }
 
   async function createDrone(newLat: number, newLng: number) {
     try {
-      const docRef = await addDoc(collection(db, "drones"), {
+      const docRef = await setDoc(doc(db, "drones", "FirstDrone"), {
         id: "FirstDrone",
         position: {
           lat: newLat,
@@ -82,16 +89,31 @@ function Map() {
         },
         speed: 12,
       });
-      console.log("Document written with ID: ", docRef.id);
+      console.log("Document written with ID: ");
     } catch (e) {
       console.error("Error adding document: ", e);
     }
   }
+  let desCounter = 0;
+  async function dispachDrone() {
+    const cityRef = doc(db, "drones", "FirstDrone");
+    const destination =
+      desCounter % 2 === 0
+        ? guysHospitalCoordinates
+        : thomasHospitalCoordinates;
+    desCounter++;
+    setDoc(cityRef, { position: destination }, { merge: true });
+  }
   async function watchDronePosition() {
-    const querySnapshot = await getDocs(collection(db, "drones"));
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data()}`);
-    });
+    const querySnapshot = await onSnapshot(
+      doc(db, "drones", "FirstDrone"),
+      (doc) => {
+        const data = doc.data();
+        if (data) {
+          flyDrone(data.position);
+        }
+      }
+    );
   }
 
   function animateMarkerTo(
@@ -142,11 +164,33 @@ function Map() {
   console.log(position);
   return (
     <>
+      <button
+        className="btn p-4 m-4 border-white border-solid border-2"
+        onClick={() =>
+          createDrone(
+            thomasHospitalCoordinates.lat,
+            thomasHospitalCoordinates.lng
+          )
+        }
+      >
+        Create Drone
+      </button>
+      <button
+        className="btn p-4 m-4 border-white border-solid border-2"
+        onClick={() => watchDronePosition()}
+      >
+        Watch Drone
+      </button>
+      <button
+        className="btn p-4 m-4 border-white border-solid border-2"
+        onClick={() => dispachDrone()}
+      >
+        Dispach Drone
+      </button>
       <GoogleMap
         zoom={14}
         center={staticMapPosition}
         mapContainerClassName={`${styles.mapcontainer}`}
-        onClick={dispachDrone}
       >
         <MarkerF position={guysHospitalCoordinates} />
         <MarkerF position={thomasHospitalCoordinates} />
