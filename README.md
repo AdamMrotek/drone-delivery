@@ -1,6 +1,12 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Technical assigment turned into project :)
+App allows you to track drone movement on google maps
 
 ## Getting Started
+
+## Prerequisites 
+>  - Google API key with maps api activated -> 5 min youtube video with set up [https://www.youtube.com/watch?v=9e-5QHpadi0&t=15s](here)
+> After setting up your key add it to you environment variables under NEXT_PUBLIC_GOOGLE_MAPS_KEY
+
 
 First, run the development server:
 
@@ -14,25 +20,24 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Developments Epics
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<ul>
+  <li>Create PWA App</li>
+  <li>Create Google Map Component </li>
+    <ul>
+      <li>Map</li>
+      <li>Marker</li>
+    </ul>
+  <li>Move function for Marker movement</li>
+  <li>Add FireStore</li>
+    <ul>
+      <li>function "fake drone" sending it's location to store</li>
+      <li>create connection to firestore with and listen for store updates</li>
+    </ul>
+  <li>Add authentication</li>
+</ul>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Check out more [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
