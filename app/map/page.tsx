@@ -9,7 +9,11 @@ import {
   doc,
   onSnapshot,
 } from "firebase/firestore";
-import { db } from "../../components/firebaseConfig";
+
+import firebase from "firebase/compat/app";
+import { db, app, auth, v9auth } from "../../components/firebaseConfig";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from "next/navigation";
 
 import {
   GoogleMap,
@@ -17,9 +21,7 @@ import {
   useLoadScript,
   Marker,
 } from "@react-google-maps/api";
-import type { NextPage } from "next";
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { JsxElement } from "typescript";
+import { useMemo, useRef, useState } from "react";
 
 export default function Home() {
   const libraries = useMemo(() => ["places"], []);
@@ -59,6 +61,10 @@ function Map() {
     lat: 51.503,
     lng: -0.1,
   });
+  const [user, loading, error] = useAuthState(v9auth);
+  // const [user, loading, error] = useAuthState(v9auth);
+  const router = useRouter();
+
   const guysHospitalCoordinates = {
     lat: 51.5024498412395,
     lng: -0.08787809742533845,
@@ -162,6 +168,12 @@ function Map() {
 
   const staticMapPosition = useMemo(() => mapPosition, [mapPosition]);
   console.log(position);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (!user) {
+    router.push("/login");
+  }
   return (
     <>
       <button
@@ -186,6 +198,12 @@ function Map() {
         onClick={() => dispachDrone()}
       >
         Dispach Drone
+      </button>{" "}
+      <button
+        className="btn p-4 m-4 border-white border-solid border-2"
+        onClick={() => auth.signOut()}
+      >
+        Sign Out
       </button>
       <GoogleMap
         zoom={14}
