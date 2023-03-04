@@ -1,16 +1,7 @@
 "use client";
 
 import styles from "./page.module.css";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  setDoc,
-  doc,
-  onSnapshot,
-} from "firebase/firestore";
-
-import firebase from "firebase/compat/app";
+import { setDoc, doc, onSnapshot } from "firebase/firestore";
 import { db, app, auth, v9auth } from "../../components/firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
@@ -21,7 +12,7 @@ import {
   useLoadScript,
   Marker,
 } from "@react-google-maps/api";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function Home() {
   const libraries = useMemo(() => ["places"], []);
@@ -30,16 +21,24 @@ export default function Home() {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY as string,
     libraries: libraries as any,
   });
+  const [user, loading, error] = useAuthState(v9auth);
+  const router = useRouter();
+  useEffect(() => {
+    console.log("user state in home" + user);
+    if (!user) {
+      router.push("/login");
+    }
+  }, [user, router]);
 
-  if (!isLoaded) {
-    return <p>Loading...</p>;
+  if (loading) {
+    return <div>Loading...</div>;
+  } else if (user && isLoaded) {
+    return (
+      <>
+        <Map />
+      </>
+    );
   }
-
-  return (
-    <>
-      <Map />
-    </>
-  );
 }
 const animationConfig = {
   duration: 1000,
@@ -61,9 +60,8 @@ function Map() {
     lat: 51.503,
     lng: -0.1,
   });
-  const [user, loading, error] = useAuthState(v9auth);
+
   // const [user, loading, error] = useAuthState(v9auth);
-  const router = useRouter();
 
   const guysHospitalCoordinates = {
     lat: 51.5024498412395,
@@ -168,12 +166,7 @@ function Map() {
 
   const staticMapPosition = useMemo(() => mapPosition, [mapPosition]);
   console.log(position);
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (!user) {
-    router.push("/login");
-  }
+
   return (
     <>
       <button

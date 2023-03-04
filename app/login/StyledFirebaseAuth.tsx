@@ -48,7 +48,6 @@ const StyledFirebaseAuth = ({
       if (!user && userSignedIn) firebaseUiWidget.reset();
       setUserSignedIn(!!user);
     });
-
     // Trigger the callback if any was set.
     if (uiCallback) uiCallback(firebaseUiWidget);
 
