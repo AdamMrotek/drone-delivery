@@ -83,31 +83,6 @@ function Map() {
     animateMarkerTo(droneMarkerRef.current, position);
   }
 
-  async function createDrone(newLat: number, newLng: number) {
-    try {
-      const docRef = await setDoc(doc(db, "drones", "FirstDrone"), {
-        id: "FirstDrone",
-        position: {
-          lat: newLat,
-          lng: newLng,
-        },
-        speed: 12,
-      });
-      console.log("Document written with ID: ");
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  }
-  let desCounter = 0;
-  async function dispachDrone() {
-    const cityRef = doc(db, "drones", "FirstDrone");
-    const destination =
-      desCounter % 2 === 0
-        ? guysHospitalCoordinates
-        : thomasHospitalCoordinates;
-    desCounter++;
-    setDoc(cityRef, { position: destination }, { merge: true });
-  }
   async function watchDronePosition() {
     const querySnapshot = await onSnapshot(
       doc(db, "drones", "FirstDrone"),
@@ -169,35 +144,14 @@ function Map() {
 
   return (
     <>
+      <DroneController />
       <button
-        className="btn p-4 m-4 border-white border-solid border-2"
-        onClick={() =>
-          createDrone(
-            thomasHospitalCoordinates.lat,
-            thomasHospitalCoordinates.lng
-          )
-        }
-      >
-        Create Drone
-      </button>
-      <button
-        className="btn p-4 m-4 border-white border-solid border-2"
+        className="btn py-2 px-4 m-4 border-solid border rounded-2xl hover:bg-slate-800 hover:text-white duration-300"
         onClick={() => watchDronePosition()}
       >
-        Watch Drone
+        Monitor Drone
       </button>
-      <button
-        className="btn p-4 m-4 border-white border-solid border-2"
-        onClick={() => dispachDrone()}
-      >
-        Dispach Drone
-      </button>{" "}
-      <button
-        className="btn p-4 m-4 border-white border-solid border-2"
-        onClick={() => auth.signOut()}
-      >
-        Sign Out
-      </button>
+
       <GoogleMap
         zoom={14}
         center={staticMapPosition}
@@ -217,5 +171,61 @@ function Map() {
         ></MarkerF>
       </GoogleMap>
     </>
+  );
+}
+function DroneController() {
+  let desCounter = 0;
+  const guysHospitalCoordinates = {
+    lat: 51.5024498412395,
+    lng: -0.08787809742533845,
+  };
+  const thomasHospitalCoordinates = {
+    lat: 51.49920431248376,
+    lng: -0.11887389031303706,
+  };
+  async function dispachDrone() {
+    const cityRef = doc(db, "drones", "FirstDrone");
+    const destination =
+      desCounter % 2 === 0
+        ? guysHospitalCoordinates
+        : thomasHospitalCoordinates;
+    desCounter++;
+    setDoc(cityRef, { position: destination }, { merge: true });
+  }
+  async function createDrone(newLat: number, newLng: number) {
+    try {
+      const docRef = await setDoc(doc(db, "drones", "FirstDrone"), {
+        id: "FirstDrone",
+        position: {
+          lat: newLat,
+          lng: newLng,
+        },
+        speed: 12,
+      });
+      console.log("Document written with ID: ");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
+  return (
+    <div>
+      <button
+        className="btn py-2 px-4 m-4 border-solid border rounded-2xl hover:bg-slate-800 hover:text-white duration-300"
+        onClick={() => dispachDrone()}
+      >
+        Dispach Drone
+      </button>
+      <button
+        className="btn py-2 px-4 m-4 border-solid border rounded-2xl hover:bg-slate-800 hover:text-white duration-300"
+        onClick={() =>
+          createDrone(
+            thomasHospitalCoordinates.lat,
+            thomasHospitalCoordinates.lng
+          )
+        }
+      >
+        Create Drone
+      </button>
+    </div>
   );
 }

@@ -16,5 +16,5 @@ export default function Home() {
   } else if (!user) {
     router.push("/login");
   }
-  return <main></main>;
+  return <></>;
 }
