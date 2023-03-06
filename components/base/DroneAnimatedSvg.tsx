@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./DroneAnimated.module.css";
+import "./DroneAnimated.css";
 export default function DroneAnimation() {
   return (
     <>
@@ -1043,8 +1043,8 @@ export default function DroneAnimation() {
               radius="2"
             ></feMorphology>{" "}
             <feFlood
-              flood-color="#32DFEC"
-              flood-opacity="1"
+              floodColor="#32DFEC"
+              floodOpacity="1"
               result="PINK"
             ></feFlood>{" "}
             <feComposite
@@ -1068,8 +1068,8 @@ export default function DroneAnimation() {
               radius="2"
             ></feMorphology>{" "}
             <feFlood
-              flood-color="#ff0000"
-              flood-opacity="0.5"
+              floodColor="#ff0000"
+              floodOpacity="0.5"
               result="PINK"
             ></feFlood>{" "}
             <feComposite

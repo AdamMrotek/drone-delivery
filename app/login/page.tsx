@@ -1,14 +1,15 @@
 "use client";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
-import StyledFirebaseAuth from "../../components/base/StyledFirebaseAuth";
-import { db, app, auth, v9auth } from "../../components/firebaseConfig";
+import { Inter } from "@next/font/google";
+import { auth, v9auth } from "../../components/firebaseConfig";
 import firebase from "firebase/compat/app";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import DroneAnimation from "../../components/base/DroneAnimation";
+// Components
+import StyledFirebaseAuth from "../../components/base/StyledFirebaseAuth";
+import DroneAnimation from "../../components/base/DroneAnimatedSvg";
+
 const inter = Inter({ subsets: ["latin"] });
 
 const uiConfig = {
