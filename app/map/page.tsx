@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./page.module.css";
-import { v9auth } from "../../components/firebaseConfig";
+import { v9auth } from "../../configs/firebase/firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
 import { useLoadScript } from "@react-google-maps/api";

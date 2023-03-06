@@ -2,7 +2,7 @@
 import { Inter } from "@next/font/google";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
-import { v9auth } from "@/components/firebaseConfig";
+import { v9auth } from "@/configs/firebase/firebaseConfig";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -2,7 +2,7 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { auth, v9auth } from "../../components/firebaseConfig";
+import { auth, v9auth } from "../../configs/firebase/firebaseConfig";
 
 export default function Header() {
   const [user, loading, error] = useAuthState(v9auth);

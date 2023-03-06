@@ -1,7 +1,7 @@
 "use client";
 import styles from "./page.module.css";
 import { Inter } from "@next/font/google";
-import { auth, v9auth } from "../../components/firebaseConfig";
+import { auth, v9auth } from "../../configs/firebase/firebaseConfig";
 import firebase from "firebase/compat/app";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";

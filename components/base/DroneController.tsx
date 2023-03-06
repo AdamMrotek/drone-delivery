@@ -1,6 +1,6 @@
 import { doc, setDoc } from "firebase/firestore";
 import { useCallback, useEffect } from "react";
-import { db } from "../firebaseConfig";
+import { db } from "../../configs/firebase/firebaseConfig";
 interface Position {
   lat: number;
   lng: number;

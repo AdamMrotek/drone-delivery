@@ -1,7 +1,7 @@
 "use client";
 import styles from "./mapController.module.css";
 import { doc, onSnapshot } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../../configs/firebase/firebaseConfig";
 import { GoogleMap, MarkerF } from "@react-google-maps/api";
 import { useMemo, useRef, useState } from "react";
 import { animateMarker } from "@/utils/animateMarker";
