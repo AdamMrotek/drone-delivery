@@ -1,7 +1,8 @@
-# Technical assigment turned into shawcase project :)
-## App allows you to track drone movement on google maps
+# drony
+## Technical assigment turned into tech demo :)
+App tracks and control drone movement on google maps between St.Thomas and Guy's Hospitals in London
 
-###Tech Stack: 
+### Tech Stack: 
 > - Front-End: Next Js (v13), React(v18), Tailwind CSS, Typescript
 > - Back-End: Firebase Authentication and Store
 > - Deployed: Vercel
