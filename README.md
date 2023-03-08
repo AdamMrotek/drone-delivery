@@ -38,19 +38,19 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
       <li>Map</li>
       <li>Marker</li>
     </ul>
-  <li>Move function to control Marker movement</li>
+  <li>Move function to control marker movement</li>
   <li>Path controller</li>
   <li>Add FireStore</li>
     <ul>
-      <li>function "fake drone" sending it's location to store</li>
-      <li>create connection to firestore with and listen for store updates</li>
+      <li>Function "fake drone" sending it's location to store</li>
+      <li>Create connection to firestore with and listen for store updates</li>
     </ul>
   <li>Add authentication</li>
-  <li> Extra features 🎉  </li>
+  <li>Extra features 🎉  </li>
    <ul>
       <li>Animated SVG</li>
-      <li>Smooth movement</li>
-      <li>Starting and restarting Drone flight</li>
+      <li>Smooth marker movement</li>
+      <li>Starting and restarting drone flight</li>
     </ul>
   
 </ul>
