@@ -7,7 +7,7 @@ interface Position {
 }
 
 export function DroneController() {
-  const intervalRef = useRef();
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const guysHospitalCoordinates: Position = {
     lat: 51.5024498412395,
     lng: -0.08787809742533845,
@@ -65,21 +65,27 @@ export function DroneController() {
   }
   const restartDrone = () => {
     const setDrone = droneAutoController(15, 5000);
-    (intervalRef.current as ReturnType<typeof setInterval> | undefined) =
+    console.log(intervalRef);
+    if (intervalRef.current) return;
+    (intervalRef.current as ReturnType<typeof setInterval> | null) =
       setInterval(() => {
         console.log("NEW INTERVAL");
         setDrone();
       }, 5000);
     const interval = intervalRef.current;
   };
+  function stopDrone() {
+    if (!intervalRef.current) return;
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+  }
   useEffect(() => {
     const setDrone = droneAutoController(15, 5000);
     console.log("Interval Set Up");
-    (intervalRef.current as ReturnType<typeof setInterval> | undefined) =
-      setInterval(() => {
-        console.log("NEW INTERVAL");
-        setDrone();
-      }, 5000);
+    intervalRef.current = setInterval(() => {
+      console.log("NEW INTERVAL");
+      setDrone();
+    }, 5000);
     const interval = intervalRef.current;
 
     return () => {
@@ -93,7 +99,7 @@ export function DroneController() {
       <button
         className="btn py-2 px-4 m-4 border-solid border rounded-2xl hover:bg-slate-800 hover:text-white duration-300"
         onClick={() => {
-          clearInterval(intervalRef.current);
+          stopDrone();
         }}
       >
         Stop drone
