@@ -71,7 +71,7 @@ export function DroneController() {
       setInterval(() => {
         console.log("NEW INTERVAL");
         setDrone();
-      }, 5000);
+      }, 2000);
     const interval = intervalRef.current;
   };
   function stopDrone() {
@@ -85,7 +85,7 @@ export function DroneController() {
     intervalRef.current = setInterval(() => {
       console.log("NEW INTERVAL");
       setDrone();
-    }, 5000);
+    }, 2000);
     const interval = intervalRef.current;
 
     return () => {

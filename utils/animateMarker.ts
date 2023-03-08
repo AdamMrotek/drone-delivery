@@ -12,7 +12,7 @@ interface AnimationConfig {
   easing: Easing;
 }
 const ANIMATION_CONFIG: AnimationConfig = {
-  duration: 1000,
+  duration: 2000,
   easing(x, t, b, c, d) {
     // jquery animation: swing (easeOutQuad)
     return -c * (t /= d) * (t - 2) + b;
