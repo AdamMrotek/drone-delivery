@@ -1,5 +1,5 @@
-#Technical assigment turned into shawcase project :)
-App allows you to track drone movement on google maps
+# Technical assigment turned into shawcase project :)
+## App allows you to track drone movement on google maps
 
 ###Tech Stack: 
 > - Front-End: Next Js (v13), React(v18), Tailwind CSS, Typescript
