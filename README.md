@@ -1,5 +1,12 @@
-Technical assigment turned into project :)
-App allows you to track drone movement on google maps
+# drony
+## Technical assigment turned into tech demo :)
+App tracks and control drone movement on google maps between St.Thomas and Guy's Hospitals in London
+
+### Tech Stack: 
+> - Front-End: Next Js (v13), React(v18), Tailwind CSS, Typescript
+> - Back-End: Firebase Authentication and Store
+> - Deployed: Vercel
+> - Extra API: Google Maps API , PWA
 
 ## Getting Started
 
@@ -9,7 +16,7 @@ App allows you to track drone movement on google maps
 >  - Google firebase config with activated FireStore and Authentication for Goolge and Email and Password methods
 
 
-First, run the development server:
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -31,20 +38,28 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
       <li>Map</li>
       <li>Marker</li>
     </ul>
-  <li>Move function for Marker movement</li>
+  <li>Move function to control marker movement</li>
+  <li>Path controller</li>
   <li>Add FireStore</li>
     <ul>
-      <li>function "fake drone" sending it's location to store</li>
-      <li>create connection to firestore with and listen for store updates</li>
+      <li>Function "fake drone" sending it's location to store</li>
+      <li>Create connection to firestore with and listen for store updates</li>
     </ul>
   <li>Add authentication</li>
+  <li>Extra features 🎉  </li>
+   <ul>
+      <li>Animated SVG</li>
+      <li>Smooth marker movement</li>
+      <li>Starting and restarting drone flight</li>
+    </ul>
+  
 </ul>
 
 ## Dev-log (issues)
-- Next-Pwa dependencie doenst work with NextJS 13 solution: https://github.com/shadowwalker/next-pwa/issues/424#issuecomment-1401929790
+- Next-Pwa dependency doenst work with NextJS 13 solution: https://github.com/shadowwalker/next-pwa/issues/424#issuecomment-1401929790
 - Marker need to use ``MarkerF``components insted for React version 18
 - Cant assign ref to ``MarkerF``, instead we use onLoad functinality of that component and assing it inside the function
-- NextJs client side variables need ``NEXT_PUBLIC_`` prefix, required for firebase store to work
+- NextJs client side variables need ``NEXT_PUBLIC_`` prefix, required for "firebase store" to work
 - FirebaseUi dependecies doesnt work with NextJs --> solution: https://github.com/firebase/firebaseui-web-react/pull/173#issuecomment-1215648239
 
 
